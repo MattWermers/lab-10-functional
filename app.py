@@ -20,21 +20,3 @@ def db_test():
     finally:
         if conn is not None:
             conn.close()
-
-def try_function( function , data ):
-    try:
-        db_conn = psycopg2.connect(database_conn)
-        cur = db_conn.cursor()
-
-        #call function with data
-
-        return "Function processed sucessfully"
-    except Exception as e:
-        if db_conn is not None:
-            db_conn.rollback()
-        return (f"Error {e}")
-    finally:
-        if cur is not None:
-            cur.close()
-        if db_conn is not None:
-            db_conn.close()
