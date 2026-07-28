@@ -20,3 +20,31 @@ def db_test():
     finally:
         if conn is not None:
             conn.close()
+
+@app.route('/db_create')
+def db_create():
+    try:
+        conn = psycopg.connect(database_conn)
+        cur = conn.cursor()
+
+        cur.execute('''
+            CREATE TABLE IF NOT EXISTS Basektball (
+            First varchar(255),
+            Last varchar(255),
+            City varchar(255),
+            Name varchar(255),
+            Number int
+            );
+        ''')
+
+        conn.commit()
+        conn.close()
+
+        return "Basketball table created"
+    except Exception as e:
+        return f"Creation of Basketball table failed {e}"
+    finally:
+        if conn is not None:
+            conn.close()
+        if cur is not None:
+            cur.close()
