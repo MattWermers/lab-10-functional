@@ -63,10 +63,8 @@ def pop_basketball():
                 ('Nikola', 'Jokic', 'Denver', 'Nuggets', 15),
                 ('Kawhi', 'Leonard', 'Los Angeles', 'Clippers', 2),
                 ('Matthew', 'Wermers', 'CU Boulder', 'CSPB', 3308
-            ) AS values(First, Last, City, Name, Number)
-            WHERE NOT EXISTS (
-                SELECT * FROM Basketball AS table
-                WHERE table.First = values.First AND table.last = values.Last)
+            ) 
+            ON CONFLICT (First,Last) DO NOTHING;
         ''')
 
         return "Basketball table populated"
