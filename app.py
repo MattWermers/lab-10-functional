@@ -68,3 +68,10 @@ def pop_basketball():
         ''')
 
         return "Basketball table populated"
+    except Exception as e:
+        return f"Population of Basketball table failed {e}"
+    finally:
+        if conn is not None:
+            conn.close()
+        if cur is not None:
+            cur.close()
