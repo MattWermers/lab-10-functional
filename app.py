@@ -64,7 +64,7 @@ def pop_basketball():
                 ('Kawhi', 'Leonard', 'Los Angeles', 'Clippers', 2),
                 ('Matthew', 'Wermers', 'CU Boulder', 'CSPB', 3308
             )
-            ON CONFILICT (First,Last) DO NOTHING
+            ON CONFLICT (First,Last) DO NOTHING
         ''')
 
         return "Basketball table populated"
