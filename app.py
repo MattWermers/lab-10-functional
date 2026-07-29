@@ -90,7 +90,7 @@ def selecting():
 
         records = cur.fetchall()
         output = "<!DOCTYPE html><html><body><table border='1'><tr><th>First</th><th>Last</th><th>City</th><th>Name</th><th>Number</th></tr>"
-        output_row = ""
+        output_row = "test"
         for row in records:
             output_row += "<tr>"
             for attribute in row:
