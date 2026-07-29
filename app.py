@@ -68,7 +68,7 @@ def pop_basketball():
                 EXCEPT
                 SELECT First, Last, City, Name, Number FROM Basketball;
         ''')
-
+        conn.commit()
         return "Basketball table populated"
     except Exception as e:
         return f"Population of Basketball table failed {e}"
