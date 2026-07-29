@@ -97,9 +97,28 @@ def selecting():
                 output_row += f"<td>{attribute}</td>"
             output += output_row + "</tr>"
         output += "</table></body></html>"
-        return output + output_row
+        return output
     except Exception as e:
         return f"Selecting from Basketball table failed {e}"
+    finally:
+        if conn is not None:
+            conn.close()
+        if cur is not None:
+            cur.close()
+
+@app.route(/db_drop)
+def dropping():
+    try:
+        conn = psycopg.connect(database_conn)
+        cur = conn.cursor()
+
+        cur.execute('''
+            DROP TABLE Basketball;
+        ''')
+        conn.commit()
+        return "Basketball table dropoped"
+    except Exception as e:
+        return f"Dropping basketball table failed {e}"
     finally:
         if conn is not None:
             conn.close()
