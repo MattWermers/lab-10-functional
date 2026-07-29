@@ -63,7 +63,7 @@ def pop_basketball():
                 ('Stephen', 'Curry', 'San Francisco', 'Warriors', 30),
                 ('Nikola', 'Jokic', 'Denver', 'Nuggets', 15),
                 ('Kawhi', 'Leonard', 'Los Angeles', 'Clippers', 2),
-                ('Matt', 'Wermers', 'CU Boulder', 'CSPB', 3308);
+                ('Matt', 'Wermers', 'CU Boulder', 'CSPB', 3308)
             ) AS v(First, Last, City, Name, Number)
             EXCEPT
             SELECT First, Last, City, Name, Number FROM Basketball;
