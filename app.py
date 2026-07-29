@@ -97,6 +97,7 @@ def selecting():
                 row += f"<td>{attribute}</td>"
             output += row
             output += "</tr>"
+        output += "</table></html>"
         return output
     except Exception as e:
         return f"Selecting from Basketball table failed {e}"
