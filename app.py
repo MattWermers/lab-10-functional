@@ -28,7 +28,7 @@ def db_create():
         cur = conn.cursor()
 
         cur.execute('''
-            CREATE TABLE IF NOT EXISTS Basektball (
+            CREATE TABLE IF NOT EXISTS Basketball (
             First varchar(255),
             Last varchar(255),
             City varchar(255),
@@ -64,7 +64,7 @@ def pop_basketball():
                 ('Kawhi', 'Leonard', 'Los Angeles', 'Clippers', 2),
                 ('Matthew', 'Wermers', 'CU Boulder', 'CSPB', 3308
             )
-            ON CONFLICT (First,Last) DO NOTHING
+            ON CONFLICT (First,Last) DO NOTHING;
         ''')
 
         return "Basketball table populated"
