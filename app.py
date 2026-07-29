@@ -56,22 +56,48 @@ def pop_basketball():
         cur = conn.cursor()
 
         cur.execute('''
-        INSERT INTO Basketball (First, Last, City, Name, Number)
-        SELECT * FROM (
-            VALUES
-                ('Jayson', 'Tatum', 'Boston', 'Celtics', 0),
-                ('Stephen', 'Curry', 'San Francisco', 'Warriors', 30),
-                ('Nikola', 'Jokic', 'Denver', 'Nuggets', 15),
-                ('Kawhi', 'Leonard', 'Los Angeles', 'Clippers', 2),
-                ('Matt', 'Wermers', 'CU Boulder', 'CSPB', 3308)
-            ) AS v(First, Last, City, Name, Number)
-            EXCEPT
-            SELECT First, Last, City, Name, Number FROM Basketball;
+            INSERT INTO Basketball (First, Last, City, Name, Number)
+            SELECT * FROM (
+                VALUES
+                    ('Jayson', 'Tatum', 'Boston', 'Celtics', 0),
+                    ('Stephen', 'Curry', 'San Francisco', 'Warriors', 30),
+                    ('Nikola', 'Jokic', 'Denver', 'Nuggets', 15),
+                    ('Kawhi', 'Leonard', 'Los Angeles', 'Clippers', 2),
+                    ('Matt', 'Wermers', 'CU Boulder', 'CSPB', 3308)
+                ) AS v(First, Last, City, Name, Number)
+                EXCEPT
+                SELECT First, Last, City, Name, Number FROM Basketball;
         ''')
 
         return "Basketball table populated"
     except Exception as e:
         return f"Population of Basketball table failed {e}"
+    finally:
+        if conn is not None:
+            conn.close()
+        if cur is not None:
+            cur.close()
+
+@app.route('/db_select')
+def selecting():
+    try:
+        conn = psycopg.connect(database_conn)
+        cur = conn.cursor()
+
+        cur.execute('''
+            SELECT * FROM Basketball;
+            ''')
+
+        records = cur.fetchall()
+        output = "<table border='1><tr><th>First</th><th>Last</th><th>City</th><th>Name</th><th>Number</th></tr>"
+        row = ""
+        for row in records:
+            for attribute in row:
+                row += f"<td>{value}</td>"
+            output += row
+        return output
+    except Exception as e:
+        return f"Selecting from Basketball table failed {e}"
     finally:
         if conn is not None:
             conn.close()
