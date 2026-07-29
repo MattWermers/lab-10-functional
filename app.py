@@ -56,15 +56,17 @@ def pop_basketball():
         cur = conn.cursor()
 
         cur.execute('''
-            INSERT INTO Basketball (First, Last, City, Name, Number)
+        INSERT INTO Basketball (First, Last, City, Name, Number)
+        SELECT * FROM (
             VALUES
                 ('Jayson', 'Tatum', 'Boston', 'Celtics', 0),
                 ('Stephen', 'Curry', 'San Francisco', 'Warriors', 30),
                 ('Nikola', 'Jokic', 'Denver', 'Nuggets', 15),
                 ('Kawhi', 'Leonard', 'Los Angeles', 'Clippers', 2),
-                ('Matthew', 'Wermers', 'CU Boulder', 'CSPB', 3308
-            ) 
-            ON CONFLICT (First,Last) DO NOTHING;
+                ('Matt', 'Wermers', 'CU Boulder', 'CSPB', 3308);
+            ) AS v(First, Last, City, Name, Number)
+            EXCEPT
+            SELECT First, Last, City, Name, Number FROM Basketball;
         ''')
 
         return "Basketball table populated"
