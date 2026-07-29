@@ -89,12 +89,14 @@ def selecting():
             ''')
 
         records = cur.fetchall()
-        output = "<!DOCTYPE html><html><table border='1><tr><th>First</th><th>Last</th><th>City</th><th>Name</th><th>Number</th></tr></html>"
+        output = "<!DOCTYPE html><html><table border='1><tr><th>First</th><th>Last</th><th>City</th><th>Name</th><th>Number</th></tr>"
         row = ""
         for row in records:
+            output += "<tr>"
             for attribute in row:
                 row += f"<td>{attribute}</td>"
             output += row
+            output += "</tr>"
         return output
     except Exception as e:
         return f"Selecting from Basketball table failed {e}"
