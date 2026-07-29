@@ -93,7 +93,7 @@ def selecting():
         row = ""
         for row in records:
             for attribute in row:
-                row += f"<td>{value}</td>"
+                row += f"<td>{attribute}</td>"
             output += row
         return output
     except Exception as e:
