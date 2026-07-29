@@ -106,7 +106,7 @@ def selecting():
         if cur is not None:
             cur.close()
 
-@app.route(/db_drop)
+@app.route('/db_drop')
 def dropping():
     try:
         conn = psycopg.connect(database_conn)
